@@ -3,7 +3,7 @@ import data from './Day2-Data.js';
 
 import styled from 'styled-components';
 
-const WrapperDay2Puzzle1 = styled.div`
+const WrapperDay2Puzzle2 = styled.div`
   border: '1px solid green';
 `;
 
@@ -13,22 +13,32 @@ const findAnswer = (theArray) => {
   let horizPosition = 0;
   let depth = 0;
 
-  // for (let i = 0; i < 4; i++) {
+  let aim = 0;
+
   for (let i = 0; i < theArray.length; i++) {
     let singleOrderArray = theArray[i].split(' '); // like ["forward", 8]
 
     let direction = singleOrderArray[0];
     let distance = Number(singleOrderArray[1]);
-    console.log('i', i);
-    console.log('singleOrderArray', singleOrderArray);
-    console.log('distance direction=', distance, ' ', direction);
 
+    console.log(
+      'horizPosition, depth, aim',
+      horizPosition,
+      ' ',
+      depth,
+      ' ',
+      aim
+    );
+    console.log('singleOrderArray ', singleOrderArray[0], singleOrderArray[1]);
+
+    console.log('aim', aim);
     if (direction === 'forward') {
       horizPosition += distance;
+      depth += aim * distance;
     } else if (direction === 'down') {
-      depth += distance;
+      aim += distance;
     } else if (direction === 'up') {
-      depth -= distance;
+      aim -= distance;
     }
   }
 
@@ -43,18 +53,18 @@ const findAnswer = (theArray) => {
 
 let answer = findAnswer(data);
 
-function Day2Puzzle1() {
+function Day2Puzzle2() {
   return (
-    <WrapperDay2Puzzle1>
-      <div>--- Day 2 Puzzle 1 ---</div>
+    <WrapperDay2Puzzle2>
+      <div>--- Day 2 Puzzle 2 ---</div>
       <div>
-        <a href="https://adventofcode.com/2021/day/2">
+        <a href="https://adventofcode.com/2021/day/2#part2">
           Link to problem statement
         </a>
       </div>
       <div>Answer is: {answer}</div>
-    </WrapperDay2Puzzle1>
+    </WrapperDay2Puzzle2>
   );
 }
 
-export default Day2Puzzle1;
+export default Day2Puzzle2;

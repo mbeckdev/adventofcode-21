@@ -5,6 +5,7 @@ import Day1Puzzle2 from './puzzles/Day1Puzzle2';
 import styled from 'styled-components';
 // import OnePuzzle from './components/OnePuzzle';
 import Day2Puzzle1 from './puzzles/Day2Puzzle1';
+import Day2Puzzle2 from './puzzles/Day2Puzzle2';
 
 const WrapperApp = styled.div`
   background-color: black;
@@ -25,6 +26,8 @@ function App() {
           <Day1Puzzle1 />
           <Day1Puzzle2 />
           <Day2Puzzle1 />
+          <Day2Puzzle2 />
+
           {/* <OnePuzzle></OnePuzzle> */}
         </main>
       </WrapperApp>
