@@ -21,17 +21,17 @@ const findAnswer = (theArray) => {
     let direction = singleOrderArray[0];
     let distance = Number(singleOrderArray[1]);
 
-    console.log(
-      'horizPosition, depth, aim',
-      horizPosition,
-      ' ',
-      depth,
-      ' ',
-      aim
-    );
-    console.log('singleOrderArray ', singleOrderArray[0], singleOrderArray[1]);
+    // console.log(
+    //   'horizPosition, depth, aim',
+    //   horizPosition,
+    //   ' ',
+    //   depth,
+    //   ' ',
+    //   aim
+    // );
+    // console.log('singleOrderArray ', singleOrderArray[0], singleOrderArray[1]);
 
-    console.log('aim', aim);
+    // console.log('aim', aim);
     if (direction === 'forward') {
       horizPosition += distance;
       depth += aim * distance;
@@ -44,9 +44,9 @@ const findAnswer = (theArray) => {
 
   theAnswer = horizPosition * depth;
 
-  console.log('end horizPosition', horizPosition);
-  console.log('end depth', depth);
-  console.log('theAnswer', theAnswer);
+  // console.log('end horizPosition', horizPosition);
+  // console.log('end depth', depth);
+  // console.log('theAnswer', theAnswer);
 
   return theAnswer;
 };
