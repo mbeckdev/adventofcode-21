@@ -4,7 +4,7 @@ import data from './Day4-Data.txt';
 
 import styled from 'styled-components';
 
-const WrapperDay4Puzzle1 = styled.div`
+const WrapperDay4Puzzle2 = styled.div`
   border: 1px solid green;
 `;
 
@@ -114,7 +114,6 @@ function createHitGrids() {
       [false, false, false, false, false],
     ];
   }
-  // console.log('empty hitGrids', hitGrids);
 }
 
 let boardsHaveWon = []; //[true,false,false]
@@ -127,7 +126,6 @@ const findAnswer = () => {
   for (let i = 0; i < boards.length; i++) {
     boardsHaveWon[i] = false;
   }
-  console.log('boardsHaveWon', boardsHaveWon);
 
   createHitGrids(); // size based of off boards length
 
@@ -135,7 +133,6 @@ const findAnswer = () => {
   for (let k = 0; k < boards.length; k++) {
     boardsThatAreWinners.push(false);
   }
-  // console.log(boardsThatAreWinners);
 
   let winningBallIndex = '';
   let winningBoardIndex = '';
@@ -143,13 +140,10 @@ const findAnswer = () => {
   // cycle through all balls
   for (let i = 0; i < balls.length; i++) {
     // cycle through all boards
-    console.log('hitGrids-1before', hitGrids);
     for (let j = 0; j < boards.length; j++) {
       let thisBoardWins = false;
       for (let y = 0; y < 5; y++) {
         for (let x = 0; x < 5; x++) {
-          // console.log(boards[j][y][x]);
-
           if (balls[i] === boards[j][y][x]) {
             hitGrids[j][y][x] = true;
           }
@@ -157,7 +151,6 @@ const findAnswer = () => {
       }
       // check if this board is a winner
       thisBoardWins = checkThisBoard(j);
-      // console.log('thisBoardWins', thisBoardWins);
       if (thisBoardWins === true) {
         //   // get out of checking everything
         boardsThatAreWinners[j] = true;
@@ -191,8 +184,6 @@ const findAnswer = () => {
         // i = 500;
 
         // i = boards.length;
-        // console.log('heh i', i);
-        // console.log('heh2 i', i);
       }
 
       // going through each board
@@ -203,15 +194,10 @@ const findAnswer = () => {
         numberOfBoardsThatWon++;
       }
     }
-    console.log('number of boarsd that won', numberOfBoardsThatWon);
     // console.log('boardsHaveWon.length', boardsHaveWon.length);
     if (numberOfBoardsThatWon === boardsHaveWon.length - 1) {
-      console.log('last board to win is boardIndex', winningBoardIndex);
     }
-    // console.log('done cycling through all boards');
   }
-
-  console.log('boardsHaveWonInOrder', boardsHaveWonInOrder);
 
   // for first ball,
   //   cycle through all boards,
@@ -227,12 +213,6 @@ const findAnswer = () => {
   let winningBallNumber = balls[winningBallIndex];
 
   let theAnswer = sumOfUnmarked * winningBallNumber;
-  console.log('theAnswer D4P1', theAnswer);
-
-  console.log(
-    'lassssst board to win, board index = ',
-    boardsHaveWonInOrder.at(-1)
-  );
 
   let scoreOfLoserBoard = 0;
   let boardnum = boardsHaveWonInOrder.at(-1);
@@ -240,7 +220,7 @@ const findAnswer = () => {
   /////////////////////////////////////is 0
 
   let puzzle2Answer = scoreOfLoserBoard * loserBallNumber;
-  console.log('puzzle2Answer = ', puzzle2Answer);
+  console.log('theAnswer D4P2', puzzle2Answer);
   // return theAnswer;
   return 123;
 };
@@ -270,7 +250,6 @@ function findSumOfAllLoserUnmarkedNumbers(boardIndex) {
 
   for (let i = 0; i < theBoard.length; i++) {
     for (let j = 0; j < theBoard[0].length; j++) {
-      console.log(loserHitsSnapshot[i][j]);
       if (loserHitsSnapshot[i][j] === false) {
         sumTotal += theBoard[i][j];
       }
@@ -330,25 +309,28 @@ function checkThisBoard(boardIndex) {
   return false;
 }
 
-function Day4Puzzle1() {
+function Day4Puzzle2() {
   let huhAnswer = answer;
   return (
-    <WrapperDay4Puzzle1 id="Day4-Puzzle1">
-      <div>--- Day4 Puzzle1 ---</div>
+    <WrapperDay4Puzzle2 id="Day4-Puzzle2">
+      <div>--- Day4 Puzzle2 ---</div>
       <div>
         <a href="https://adventofcode.com/2021/day/4">
           Link to problem statement
         </a>
       </div>
       <div>
-        D4P1 Answer is: {huhAnswer} - not this, check console.log answer
+        D4P2 Answer is: {huhAnswer} - not this, check console.log answer
       </div>
-    </WrapperDay4Puzzle1>
+    </WrapperDay4Puzzle2>
   );
 }
 
-export default Day4Puzzle1;
+export default Day4Puzzle2;
 
 // Notes
-// Right before line 185 I check hitGrids - they're all false
+// ah geez, I'm checking multiple times around line 161 -
+// there's probably a better way for that to happen.
+// I think next time I'll use some classes instead of 3d arrays.
+//   seems cleaner that way.
 //

@@ -4,7 +4,7 @@ import data from './Day4-Data.txt';
 
 import styled from 'styled-components';
 
-const WrapperDay4Puzzle2 = styled.div`
+const WrapperDay4Puzzle1 = styled.div`
   border: 1px solid green;
 `;
 
@@ -296,11 +296,11 @@ function checkThisBoard(boardIndex) {
 // console.log('answer below', answer);
 // let answer = findAnswer(data);
 
-function Day4Puzzle2() {
+function Day4Puzzle1() {
   let huhAnswer = answer;
   return (
-    <WrapperDay4Puzzle2 id="Day4-Puzzle2">
-      <div>--- Day4 Puzzle2 ---</div>
+    <WrapperDay4Puzzle1 id="Day4-Puzzle1">
+      <div>--- Day4 Puzzle1 ---</div>
       <div>
         <a href="https://adventofcode.com/2021/day/4#part2">
           Link to problem statement
@@ -309,11 +309,11 @@ function Day4Puzzle2() {
       <div>
         D4P1 Answer is: {huhAnswer} - not this, check console.log answer
       </div>
-    </WrapperDay4Puzzle2>
+    </WrapperDay4Puzzle1>
   );
 }
 
-export default Day4Puzzle2;
+export default Day4Puzzle1;
 
 // Notes
 // Right before line 185 I check hitGrids - they're all false
