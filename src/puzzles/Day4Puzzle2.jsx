@@ -4,7 +4,7 @@ import data from './Day4-Data.txt';
 
 import styled from 'styled-components';
 
-const WrapperDay4Puzzle2 = styled.div`
+const WrapperDay4Puzzle1 = styled.div`
   border: 1px solid green;
 `;
 
@@ -20,24 +20,20 @@ const WrapperDay4Puzzle2 = styled.div`
 // }
 
 let rawText = 'will be replaced';
-
 let answer = 1234;
+
 async function findStuffFromFile() {
   // let url = exampleData;
   let url = data;
 
-  // console.log(url);
   // let url = 'http://localhost:3000/src/puzzles/Day4-ExampleData.txt';
   let response = await fetch(url);
-  // console.log(response);
-  // console.log('wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww');
   rawText = await response.text(); // read response body and parse as JSON
   //   response.text() – read the response and return as text,
   // response.json() – parse the response as JSON,
   // response.formData() – return the response as FormData object (explained in the next chapter),
   // response.blob() – return the response as Blob (binary data with type),
   // response.arrayBuffer() – return the response as ArrayBuffer (low-level representation of binary data),
-  // console.log(rawText);
 
   splitUpData();
   answer = findAnswer();
@@ -50,19 +46,14 @@ let balls = [];
 let boards = [];
 
 const splitUpData = () => {
-  // console.log('splitting up data');
-
   let arrayOfLines = rawText.split('\r\n');
-  // console.log(arrayOfLines);
 
   balls = arrayOfLines[0].split(',');
-  // console.log('balls = ', balls);
   for (let i = 0; i < balls.length; i++) {
     balls[i] = Number(balls[i]);
   }
 
   let notTop2Lines = arrayOfLines.slice(2);
-  // console.log('notTop2Lines', notTop2Lines);
 
   // let boards = [];
 
@@ -77,10 +68,7 @@ const splitUpData = () => {
 
     for (let k = 0; k < 5; k++) {
       // notTop2Lines[0] = "22 13 17 11  0"
-
       let rowText = notTop2Lines[i + k];
-
-      // console.log('rowText', rowText);
 
       // find the row Array
       let rowArray = [];
@@ -89,7 +77,6 @@ const splitUpData = () => {
         // console.log('number = -' + thisNumber + '-');
         if (thisNumber[0] === ' ') {
           thisNumber = thisNumber[1];
-          // console.log('thisNumber single digit is -' + thisNumber + '-');
         }
         thisNumber = Number(thisNumber);
         rowArray.push(thisNumber);
@@ -97,8 +84,8 @@ const splitUpData = () => {
       }
       // add rowArray to tempBoard
       tempBoard.push(rowArray);
-      // console.log('tempBoard', tempBoard);
 
+      // general pseudo code notes:
       // add all the rows to tempBoard
       // for (let k = 0; k < 5; k++) {
       //   console.log('rowArray at row k = ', k, ' = ', rowArray);
@@ -107,43 +94,15 @@ const splitUpData = () => {
       // }
     }
     boards.push(tempBoard);
-    // console.log('boards', boards);
   }
-  // console.log('hitGrids-9before', hitGrids);
-
-  // find balls array
-  // set boards array
-  //  boards array = boards[0] is first board
-  //  tempBoard[y][x] will tell the x position, left to right, and y position top to bottom
-  //    tempBoard[row#][col#]
-
-  // Fix " 8" into numbers
 };
-
-// class board {
-//   hasWon() {
-//     if ('a' == 'a') {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   }
-// }
 
 let hitGrids = [[[]]]; //false = no hit, true = hit
 function createHitGrids() {
   let emptyHitGrid = [];
   for (let i = 0; i < 5; i++) {
     emptyHitGrid.push([false, false, false, false, false]);
-
-    // emptyHitGrid.push(0);
-    // for (let j = 0; j < 5; j++) {
-    //   emptyHitGrid[i].push(0);
-    //   // emptyHitGrid[i][j] = false;
-    // }
-    // console.log('emptyHitGrid ea', emptyHitGrid);
   }
-  // console.log('emptyHitGrid', emptyHitGrid);
 
   for (let i = 0; i < boards.length; i++) {
     // hitGrids[i] = [...emptyHitGrid];
@@ -158,14 +117,19 @@ function createHitGrids() {
   // console.log('empty hitGrids', hitGrids);
 }
 
+let boardsHaveWon = []; //[true,false,false]
+let boardsHaveWonInOrder = [];
+let loserBallNumber = 0;
+let loserHitsSnapshot = [];
+
 const findAnswer = () => {
-  // if (isResponseBack) {
+  // initialize boardshavewon
+  for (let i = 0; i < boards.length; i++) {
+    boardsHaveWon[i] = false;
+  }
+  console.log('boardsHaveWon', boardsHaveWon);
 
-  // console.log('finding answer');
-
-  // console.log('hitGrids-2-1before', hitGrids);
   createHitGrids(); // size based of off boards length
-  // console.log('hitGrids-2-2before', hitGrids);
 
   let boardsThatAreWinners = [];
   for (let k = 0; k < boards.length; k++) {
@@ -178,11 +142,8 @@ const findAnswer = () => {
 
   // cycle through all balls
   for (let i = 0; i < balls.length; i++) {
-    // for (let i = 0; i < 1; i++) {
-    // console.log('ball is', balls[i]);
-
     // cycle through all boards
-    // console.log('hitGrids-1before', hitGrids);
+    console.log('hitGrids-1before', hitGrids);
     for (let j = 0; j < boards.length; j++) {
       let thisBoardWins = false;
       for (let y = 0; y < 5; y++) {
@@ -190,19 +151,7 @@ const findAnswer = () => {
           // console.log(boards[j][y][x]);
 
           if (balls[i] === boards[j][y][x]) {
-            // console.log(
-            //   'a hit, ball',
-            //   balls[i],
-            //   'board',
-            //   j,
-            //   'row',
-            //   y,
-            //   'spot',
-            //   y
-            // );
-            // console.log('hitGrids-before', hitGrids);
             hitGrids[j][y][x] = true;
-            // console.log('hitGrids-after', hitGrids);
           }
         }
       }
@@ -214,16 +163,55 @@ const findAnswer = () => {
         boardsThatAreWinners[j] = true;
         winningBallIndex = i;
         winningBoardIndex = j;
+        boardsHaveWon[winningBoardIndex] = true;
+
+        if (
+          boardsHaveWonInOrder.findIndex(
+            (item) => item === winningBoardIndex
+          ) === -1
+        ) {
+          boardsHaveWonInOrder.push(winningBoardIndex);
+          if (boardsHaveWonInOrder.length === boards.length) {
+            if (loserBallNumber === 0) {
+              loserBallNumber = balls[i];
+              // let r = [];
+              for (let p = 0; p < 5; p++) {
+                // r.push(hitGrids[winningBoardIndex][p]);
+                let row = [];
+                for (let q = 0; q < 5; q++) {
+                  row.push(hitGrids[winningBoardIndex][p][q]);
+                  // loserHitsSnapshot[p][q] = hitGrids[winningBoardIndex][p][q];
+                }
+                loserHitsSnapshot.push([...row]);
+              }
+            }
+          }
+        }
         //   // don't check any more balls after this one.
+        // i = 500;
+
         // i = boards.length;
         // console.log('heh i', i);
-        i = 500;
         // console.log('heh2 i', i);
       }
-      // console.log('hitgriiiiiid', hitGrids);
+
+      // going through each board
+    }
+    let numberOfBoardsThatWon = 0;
+    for (let k = 0; k < boardsHaveWon.length; k++) {
+      if (boardsHaveWon[k] === true) {
+        numberOfBoardsThatWon++;
+      }
+    }
+    console.log('number of boarsd that won', numberOfBoardsThatWon);
+    // console.log('boardsHaveWon.length', boardsHaveWon.length);
+    if (numberOfBoardsThatWon === boardsHaveWon.length - 1) {
+      console.log('last board to win is boardIndex', winningBoardIndex);
     }
     // console.log('done cycling through all boards');
   }
+
+  console.log('boardsHaveWonInOrder', boardsHaveWonInOrder);
 
   // for first ball,
   //   cycle through all boards,
@@ -233,14 +221,6 @@ const findAnswer = () => {
 
   //
 
-  // console.log('hitGrids', hitGrids);
-  // console.log(
-  //   'winningBallIndex',
-  //   winningBallIndex,
-  //   'ball number',
-  //   balls[winningBallIndex]
-  // );
-
   // we have a board that won, find sum of all unmarked numbers
   let sumOfUnmarked = findSumOfAllUnmarkedNumbers(winningBoardIndex);
   // then multiply that sum by the ball number that was just called
@@ -249,6 +229,18 @@ const findAnswer = () => {
   let theAnswer = sumOfUnmarked * winningBallNumber;
   console.log('theAnswer D4P1', theAnswer);
 
+  console.log(
+    'lassssst board to win, board index = ',
+    boardsHaveWonInOrder.at(-1)
+  );
+
+  let scoreOfLoserBoard = 0;
+  let boardnum = boardsHaveWonInOrder.at(-1);
+  scoreOfLoserBoard = findSumOfAllLoserUnmarkedNumbers(boardnum);
+  /////////////////////////////////////is 0
+
+  let puzzle2Answer = scoreOfLoserBoard * loserBallNumber;
+  console.log('puzzle2Answer = ', puzzle2Answer);
   // return theAnswer;
   return 123;
 };
@@ -262,6 +254,24 @@ function findSumOfAllUnmarkedNumbers(boardIndex) {
   for (let i = 0; i < theBoard.length; i++) {
     for (let j = 0; j < theBoard[0].length; j++) {
       if (theHits[i][j] === false) {
+        sumTotal += theBoard[i][j];
+      }
+    }
+  }
+
+  return sumTotal;
+}
+
+function findSumOfAllLoserUnmarkedNumbers(boardIndex) {
+  let theBoard = boards[boardIndex];
+  // let theHits = loserHitsSnapshot;
+
+  let sumTotal = 0;
+
+  for (let i = 0; i < theBoard.length; i++) {
+    for (let j = 0; j < theBoard[0].length; j++) {
+      console.log(loserHitsSnapshot[i][j]);
+      if (loserHitsSnapshot[i][j] === false) {
         sumTotal += theBoard[i][j];
       }
     }
@@ -288,32 +298,56 @@ function checkThisBoard(boardIndex) {
   }
 
   //cycle through 5 columns
+  for (let x = 0; x < 5; x++) {
+    let hitCounter = 0;
+    for (let y = 0; y < 5; y++) {
+      if (hitGrids[boardIndex][y][x] === true) {
+        hitCounter++;
+      }
+    }
+    if (hitCounter === 5) {
+      // console.log('win found in row ', y, ' board', boardIndex);
+      return true;
+    }
+  }
+
+  //check diagonals
+  if (
+    hitGrids[boardIndex][0][0] &&
+    hitGrids[boardIndex][1][1] &&
+    hitGrids[boardIndex][2][2]
+  ) {
+    return true;
+  }
+  if (
+    hitGrids[boardIndex][0][2] &&
+    hitGrids[boardIndex][1][1] &&
+    hitGrids[boardIndex][2][0]
+  ) {
+    return true;
+  }
 
   return false;
 }
 
-// let answer = findAnswer();
-// console.log('answer below', answer);
-// let answer = findAnswer(data);
-
-function Day4Puzzle2() {
+function Day4Puzzle1() {
   let huhAnswer = answer;
   return (
-    <WrapperDay4Puzzle2 id="Day4-Puzzle2">
-      <div>--- Day4 Puzzle2 ---</div>
+    <WrapperDay4Puzzle1 id="Day4-Puzzle1">
+      <div>--- Day4 Puzzle1 ---</div>
       <div>
-        <a href="https://adventofcode.com/2021/day/4#part2">
+        <a href="https://adventofcode.com/2021/day/4">
           Link to problem statement
         </a>
       </div>
       <div>
         D4P1 Answer is: {huhAnswer} - not this, check console.log answer
       </div>
-    </WrapperDay4Puzzle2>
+    </WrapperDay4Puzzle1>
   );
 }
 
-export default Day4Puzzle2;
+export default Day4Puzzle1;
 
 // Notes
 // Right before line 185 I check hitGrids - they're all false
