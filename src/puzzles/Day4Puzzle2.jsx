@@ -167,13 +167,10 @@ const findAnswer = () => {
           if (boardsHaveWonInOrder.length === boards.length) {
             if (loserBallNumber === 0) {
               loserBallNumber = balls[i];
-              // let r = [];
               for (let p = 0; p < 5; p++) {
-                // r.push(hitGrids[winningBoardIndex][p]);
                 let row = [];
                 for (let q = 0; q < 5; q++) {
                   row.push(hitGrids[winningBoardIndex][p][q]);
-                  // loserHitsSnapshot[p][q] = hitGrids[winningBoardIndex][p][q];
                 }
                 loserHitsSnapshot.push([...row]);
               }
@@ -203,7 +200,7 @@ const findAnswer = () => {
   //   cycle through all boards,
   //     cycle through all numbers on a board
   //         -if it matches, changed spot in hit board to true
-  //     check if this board is a winner.   board.checkIfWon
+  //     check if this board is a winner.   board.checkIfWon would work if I made classes!
 
   //
 
@@ -244,7 +241,6 @@ function findSumOfAllUnmarkedNumbers(boardIndex) {
 
 function findSumOfAllLoserUnmarkedNumbers(boardIndex) {
   let theBoard = boards[boardIndex];
-  // let theHits = loserHitsSnapshot;
 
   let sumTotal = 0;
 
@@ -333,4 +329,3 @@ export default Day4Puzzle2;
 // there's probably a better way for that to happen.
 // I think next time I'll use some classes instead of 3d arrays.
 //   seems cleaner that way.
-//
