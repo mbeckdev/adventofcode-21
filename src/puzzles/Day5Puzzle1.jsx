@@ -20,7 +20,7 @@ class Point {
     return this.x;
   }
 }
-let dur = new Point(1, 2);
+// let dur = new Point(1, 2);
 // console.log(dur.x, dur.y, 'example points');
 
 class Vector {
@@ -237,7 +237,7 @@ function Day5Puzzle1() {
 
   const gameLogic = () => {
     // console.log('game logic starts');
-    let aBoard = getBoard(arrayOfVectors);
+    // let aBoard = getBoard(arrayOfVectors);
     let answer = getAnswer(getBoard(arrayOfVectors));
     setAnswer(answer);
     // console.log('answer = ', answer);
@@ -287,6 +287,7 @@ function Day5Puzzle1() {
       // getBoard(arrayOfVectors);
       gameLogic();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rawText]);
 
   useEffect(() => {
@@ -309,7 +310,7 @@ function Day5Puzzle1() {
         setLoading(false);
         // console.log('loading complete!');
       });
-  }, []);
+  }, [url]);
   if (loading) return 'Loading...';
   if (error) return 'Error!';
 

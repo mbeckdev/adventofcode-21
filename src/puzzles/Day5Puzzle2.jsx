@@ -20,7 +20,7 @@ class Point {
     return this.x;
   }
 }
-let dur = new Point(1, 2);
+// let dur = new Point(1, 2);
 // console.log(dur.x, dur.y, 'example points');
 
 class Vector {
@@ -180,7 +180,7 @@ class Vector {
   }
 
   getAllPoints() {
-    console.log('getting all points');
+    // console.log('getting all points');
 
     //Find this.myPoints = an array of points depending on
     this.checkIfOnlyXsAreSame();
@@ -298,7 +298,7 @@ function Day5Puzzle2() {
 
   const gameLogic = () => {
     // console.log('game logic starts');
-    let aBoard = getBoard(arrayOfVectors);
+    // let aBoard = getBoard(arrayOfVectors);
     let answer = getAnswer(getBoard(arrayOfVectors));
     setAnswer(answer);
     // console.log('answer = ', answer);
@@ -306,7 +306,7 @@ function Day5Puzzle2() {
   };
 
   const splitUpData = () => {
-    console.log('splitting up data');
+    // console.log('splitting up data');
     let arrayOfLines = rawText.split('\r\n');
     // console.log('arrayOfLines', arrayOfLines);
     // arrayOfLines looks like "['0,9 -> 5,9','8,0 -> 0,8',...]"
@@ -366,6 +366,7 @@ function Day5Puzzle2() {
       // getBoard(arrayOfVectors);
       gameLogic();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rawText]);
 
   useEffect(() => {
@@ -388,7 +389,7 @@ function Day5Puzzle2() {
         setLoading(false);
         // console.log('loading complete!');
       });
-  }, []);
+  }, [url]);
   if (loading) return 'Loading...';
   if (error) return 'Error!';
 
