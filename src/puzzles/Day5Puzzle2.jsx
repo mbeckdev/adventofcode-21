@@ -4,7 +4,7 @@ import data from './Day5-Data.txt';
 
 import styled from 'styled-components';
 
-const WrapperDay5Puzzle1 = styled.div`
+const WrapperDay5Puzzle2 = styled.div`
   border: 1px solid green;
 `;
 
@@ -120,12 +120,73 @@ class Vector {
     }
   }
 
+  checkForOnePoint() {
+    if (
+      this.startPoint.y === this.endPoint.y &&
+      this.startPoint.x === this.endPoint.x
+    ) {
+      console.log('only one point here');
+      let tempPoint = new Point(this.startPoint.x, this.startPoint.y);
+      let tempArray = [];
+      tempArray.push(tempPoint);
+      this.myPoints = [...tempArray];
+    }
+  }
+  checkForDiagonals() {
+    if (
+      this.startPoint.y !== this.endPoint.y &&
+      this.startPoint.x !== this.endPoint.x
+    ) {
+      let p1YToP2YDirection = 0; // 1 or -1, 0 if same
+      //Check direction of y points
+      if (this.endPoint.y > this.startPoint.y) {
+        p1YToP2YDirection = 1;
+      } else if (this.endPoint.y < this.startPoint.y) {
+        p1YToP2YDirection = -1;
+      } else {
+        // y's are the same
+        p1YToP2YDirection = 0;
+      }
+
+      let p1XToP2XDirection = 0; // 1 or -1, 0 if same
+      //Check direction of X points
+      if (this.endPoint.x > this.startPoint.x) {
+        p1XToP2XDirection = 1;
+      } else if (this.endPoint.x < this.startPoint.x) {
+        p1XToP2XDirection = -1;
+      } else {
+        // X's are the same
+        p1XToP2XDirection = 0;
+      }
+
+      let numberOfPoints =
+        Math.abs(this.startPoint.y + this.endPoint.y * -1) + 1;
+      // console.log('numberOfPoints', numberOfPoints);
+
+      // for each point, add it to a temp array
+      let tempArray = [];
+      for (let i = 0; i < numberOfPoints; i++) {
+        let tempPoint = new Point(
+          this.startPoint.x + i * p1XToP2XDirection,
+          this.startPoint.y + i * p1YToP2YDirection
+        );
+
+        // console.log('tempPoint', tempPoint);
+        tempArray.push(tempPoint);
+      }
+      this.myPoints = [...tempArray];
+      // console.log('this.myPoints', this.myPoints);
+    }
+  }
+
   getAllPoints() {
-    // console.log('getting all points');
+    console.log('getting all points');
 
     //Find this.myPoints = an array of points depending on
     this.checkIfOnlyXsAreSame();
     this.checkIfOnlyYsAreSame();
+    this.checkForOnePoint();
+    this.checkForDiagonals();
 
     // Note:
     // still doesn't work for points that are 1 length long
@@ -136,7 +197,7 @@ class Vector {
 // ****************************************
 // actual class/function to export
 // ****************************************
-function Day5Puzzle1() {
+function Day5Puzzle2() {
   // let url = exampleData;
   let url = data;
   // let url = rawText;
@@ -245,7 +306,7 @@ function Day5Puzzle1() {
   };
 
   const splitUpData = () => {
-    // console.log('splitting up data');
+    console.log('splitting up data');
     let arrayOfLines = rawText.split('\r\n');
     // console.log('arrayOfLines', arrayOfLines);
     // arrayOfLines looks like "['0,9 -> 5,9','8,0 -> 0,8',...]"
@@ -268,8 +329,26 @@ function Day5Puzzle1() {
       rawTextYsArray.push(y1);
       rawTextYsArray.push(y2);
 
+      // console.log(dur);
+
+      // let endOfStringIndex = arrayOfLines[0].length;
+      // let point1AsText = arrayOfLines[i].slice(0, 3);
+      // let point2AsText = arrayOfLines[i].slice(
+      //   endOfStringIndex - 3,
+      //   endOfStringIndex
+      // );
+
+      // let x1 = Number(point1AsText.slice(0, 1));
+      // let y1 = Number(point1AsText.slice(2, 3));
+      // // console.log('x1', x1, 'y1', y1);
+
+      // let x2 = Number(point2AsText.slice(0, 1));
+      // let y2 = Number(point2AsText.slice(2, 3));
+      // // console.log('x2', x2, 'y2', y2);
+
       let point1 = new Point(x1, y1);
       let point2 = new Point(x2, y2);
+      // console.log('point1 and point2', point1, point2);
 
       let vectorA = new Vector(point1, point2);
       // console.log('p1XTo', 'vectorA', vectorA, 'i', i, 'p1XTo');
@@ -314,18 +393,19 @@ function Day5Puzzle1() {
   if (error) return 'Error!';
 
   return (
-    <WrapperDay5Puzzle1 id="Day5-Puzzle1">
-      <div>--- Day5 Puzzle1 ---</div>
+    <WrapperDay5Puzzle2 id="Day5-Puzzle2">
       <div>
+        --- Day5 Puzzle2 ---
         <a href="https://adventofcode.com/2021/day/5">
           Link to problem statement
         </a>
       </div>
-      <div>Day5Puzzle1 Answer is: {answer}</div>
+
+      <div>Day5Puzzle2 Answer is: {answer}</div>
 
       {/* <div>{rawText}</div> */}
-    </WrapperDay5Puzzle1>
+    </WrapperDay5Puzzle2>
   );
 }
 
-export default Day5Puzzle1;
+export default Day5Puzzle2;
