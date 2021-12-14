@@ -5,11 +5,11 @@ import data from './puzzle-data/Day7-Data.txt';
 
 import styled from 'styled-components';
 
-const WrapperDay7Puzzle1 = styled.div`
+const WrapperDay7Puzzle2 = styled.div`
   border: 1px solid green;
 `;
 
-function Day7Puzzle1() {
+function Day7Puzzle2() {
   let url = data;
 
   const [answer, setAnswer] = useState(null);
@@ -113,21 +113,19 @@ function Day7Puzzle1() {
   // Rendering
   // ************************
   return (
-    <WrapperDay7Puzzle1 id="Day7-Puzzle1">
+    <WrapperDay7Puzzle2 id="Day7-Puzzle2">
       <div>
         <span>
-          --- Day7 Puzzle1 ---{' '}
+          --- Day7 Puzzle2 ---{' '}
           <a href="https://adventofcode.com/2021/day/7">
             Link to problem statement
           </a>
         </span>
       </div>
 
-      <div>Day7Puzzle1 Answer is: {answer}</div>
-
-      {/* <div>{rawText}</div> */}
-    </WrapperDay7Puzzle1>
+      <div>Day7Puzzle2 Answer is: {answer}</div>
+    </WrapperDay7Puzzle2>
   );
 }
 
-export default Day7Puzzle1;
+export default Day7Puzzle2;
