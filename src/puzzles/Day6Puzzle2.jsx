@@ -110,7 +110,7 @@ function Day6Puzzle2() {
 
   function getAnswer() {
     let numberOfDaysLater = 256;
-    // let theAnswer = 123456789;
+    let theAnswer = 123456789;
 
     //initialState is array from data
     // theAnswer = getNumberOfFish([3, 4, 3, 1, 2], numberOfDaysLater);

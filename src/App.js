@@ -15,6 +15,7 @@ import Day5Puzzle1 from './puzzles/Day5Puzzle1';
 import Day5Puzzle2 from './puzzles/Day5Puzzle2';
 import Day6Puzzle1 from './puzzles/Day6Puzzle1';
 import Day6Puzzle2 from './puzzles/Day6Puzzle2';
+import Day7Puzzle1 from './puzzles/Day7Puzzle1';
 
 const WrapperApp = styled.div`
   background-color: black;
@@ -35,16 +36,17 @@ function App() {
           <Day1Puzzle2 />
           <Day2Puzzle1 />
           <Day2Puzzle2 />
-          <Day3Puzzle1 />
-          <Day3Puzzle2 />
-          <Day4Puzzle1 />
+          {/* <Day3Puzzle1 /> */}
+          {/* <Day3Puzzle2 /> */}
+          {/* <Day4Puzzle1 /> */}
           {/* <Day4Puzzle2 /> */}
           {/* <Day5Puzzle1 /> */}
           {/* <Day5Puzzle2 /> */}
           {/* <FetchDataExample /> */}
           {/* <OnePuzzle></OnePuzzle> */}
           {/* <Day6Puzzle1 /> */}
-          <Day6Puzzle2 />
+          {/* <Day6Puzzle2 /> */}
+          <Day7Puzzle1 />
         </main>
       </WrapperApp>
     </div>
