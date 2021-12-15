@@ -24,37 +24,56 @@ function Day7Puzzle2() {
   // Functions
   // ************************
 
+  const getTempFuel = (distance) => {
+    let tempFuel = 0;
+    for (let i = 0; i < distance + 1; i++) {
+      tempFuel += i;
+    }
+    return tempFuel;
+  };
+
   function getAnswer() {
     let theAnswer = 0;
 
     // Find min and max of initial array
     let min = Math.min(...initialState);
     let max = Math.max(...initialState);
-    console.log('min', min, 'max', max);
+
+    let distanceToFuelLookup = { 0: 0, 1: 1, 2: 3 };
 
     let distances = [];
-    // from the smallest number in the array to the largest
+    let fuelPerSpot = [];
+    // from the smallest number in the array to the largest   0 to 16
     for (let i = min; i < max; i++) {
       //find an array of distances from 0 (i)
-      let length = 0;
+
+      let thisFuel = 0;
+      let thisFuelSummed = 0;
       // for each number in the initialstate array, how far is it from the index?
+
       for (let j = 0; j < initialState.length; j++) {
+        thisFuel = 0;
         let distance = Math.abs(initialState[j] - i);
-        length += distance;
+
+        // expand the distanceToFuelLookup table if that item doesn't exist.
+        if (!distanceToFuelLookup[distance]) {
+          distanceToFuelLookup[distance] = getTempFuel(distance);
+        }
+        thisFuel = distanceToFuelLookup[distance];
+        thisFuelSummed += thisFuel;
       }
-      distances.push(length);
+      fuelPerSpot.push(thisFuelSummed);
+      distances.push(thisFuelSummed);
     }
-    console.log('distances', distances);
 
     //find the index of the smallest one in distances
-    let smallestDistance = Math.min(...distances);
-    console.log('smallestDistance', smallestDistance);
-    let index = distances.indexOf(smallestDistance);
-    console.log('index', index);
+    let smallestFuel = Math.min(...fuelPerSpot);
+    let index = fuelPerSpot.indexOf(smallestFuel);
+    // console.log('smallestfuel', smallestFuel, ' at index', index);
 
     // set answer
-    theAnswer = smallestDistance;
-    console.log('answer..... = ', theAnswer);
+    theAnswer = smallestFuel;
+    // console.log('answer..... = ', theAnswer);
     return theAnswer;
   }
 
@@ -64,14 +83,11 @@ function Day7Puzzle2() {
   };
 
   const splitUpData = () => {
-    // let arrayOfLines = rawText.split('\r\n');
     let initialArrayInText = rawText.split(',');
-    console.log('initialArrayInText', initialArrayInText);
 
     for (let i = 0; i < initialArrayInText.length; i++) {
       initialState.push(Number(initialArrayInText[i]));
     }
-    console.log('initialState', initialState);
   };
 
   // ************************
@@ -95,7 +111,7 @@ function Day7Puzzle2() {
       })
       .then((rawText) => {
         setRawText(rawText);
-        console.log('settingRawText');
+        // console.log('settingRawText');
       })
       .catch((error) => {
         console.error('Error fetching rawText: ', error);
@@ -103,7 +119,7 @@ function Day7Puzzle2() {
       })
       .finally(() => {
         setLoading(false);
-        console.log('loading complete!');
+        // console.log('loading complete!');
       });
   }, [url]);
   if (loading) return 'Loading...';
