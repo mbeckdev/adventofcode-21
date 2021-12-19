@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 // import exampleData from './Day5-ExampleData.txt';
-import data from './Day5-Data.txt';
+// import data from './Day5-Data.txt';
+import data from './Day5-ExampleData.txt';
 
 import styled from 'styled-components';
 
@@ -217,7 +218,7 @@ function Day5Puzzle1() {
     //Determine number of points where at least two lines overlap
     // for (let i=0; i<board.length; i++) {
 
-    // console.log('board in getAnswer', board);
+    console.log('board in getAnswer', board);
 
     // for each point, is it a 2 or higher?
     let twoOrHigherCounter = 0;

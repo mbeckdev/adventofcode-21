@@ -18,6 +18,8 @@ import Day6Puzzle2 from './puzzles/Day6Puzzle2';
 import Day7Puzzle1 from './puzzles/Day7Puzzle1';
 import Day7Puzzle2 from './puzzles/Day7Puzzle2';
 
+import Day8Puzzle1 from './puzzles/Day8Puzzle1';
+
 const WrapperApp = styled.div`
   background-color: black;
   color: lightblue;
@@ -33,10 +35,10 @@ function App() {
       <WrapperApp>
         <header>My scrap paper for Advent of Code '21</header>
         <main>
-          <Day1Puzzle1 />
+          {/* <Day1Puzzle1 />
           <Day1Puzzle2 />
           <Day2Puzzle1 />
-          <Day2Puzzle2 />
+          <Day2Puzzle2 /> */}
           {/* <Day3Puzzle1 /> */}
           {/* <Day3Puzzle2 /> */}
           {/* <Day4Puzzle1 /> */}
@@ -48,7 +50,9 @@ function App() {
           {/* <Day6Puzzle1 /> */}
           {/* <Day6Puzzle2 /> */}
           {/* <Day7Puzzle1 /> */}
-          <Day7Puzzle2 />
+          {/* <Day7Puzzle2 /> */}
+
+          <Day8Puzzle1 />
         </main>
       </WrapperApp>
     </div>

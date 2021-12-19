@@ -73,7 +73,6 @@ function Day7Puzzle2() {
 
     // set answer
     theAnswer = smallestFuel;
-    // console.log('answer..... = ', theAnswer);
     return theAnswer;
   }
 
